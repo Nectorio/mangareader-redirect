@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrir en MangaReader</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0A0C;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .container { max-width: 400px; }
+        .icon { font-size: 64px; margin-bottom: 16px; }
+        h1 { font-size: 24px; margin-bottom: 8px; }
+        p { color: #aaa; margin-bottom: 24px; line-height: 1.5; }
+        .btn {
+            display: inline-block;
+            background: #6C63FF;
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #5A52E0; }
+        .download { margin-top: 16px; }
+        .download a { color: #6C63FF; text-decoration: none; }
+        .download a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">&#128218;</div>
+        <h1>Abrir en MangaReader</h1>
+        <p>Para leer este manga necesitas tener la app MangaReader instalada.</p>
+        <a id="openBtn" class="btn" href="#">Abrir MangaReader</a>
+        <div class="download">
+            <p><a href="https://play.google.com/store/apps/details?id=com.mangareader">Descargar MangaReader</a></p>
+        </div>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const mangaId = params.get('mangaId');
+        if (mangaId) {
+            const deepLink = 'mangareader://manga?mangaId=' + encodeURIComponent(mangaId);
+            document.getElementById('openBtn').href = deepLink;
+            // Try to open the app automatically
+            window.location.href = deepLink;
+        } else {
+            document.getElementById('openBtn').style.display = 'none';
+            document.querySelector('p').textContent = 'Enlace no valido.';
+        }
+    </script>
+</body>
+</html>
