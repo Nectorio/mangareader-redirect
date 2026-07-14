@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrir en MangaReader</title>
+    <title>Abrir en MiManga</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -63,8 +63,8 @@
 <body>
     <div class="container">
         <div class="icon">&#128218;</div>
-        <h1 id="title">Abrir en MangaReader</h1>
-        <p id="subtitle">Para leer este manga necesitas tener la app MangaReader instalada.</p>
+        <h1 id="title">Abrir en MiManga</h1>
+        <p id="subtitle">Para leer este manga necesitas tener la app MiManga instalada.</p>
 
         <div id="loadingState" class="loading">
             <div class="spinner"></div>
@@ -72,10 +72,10 @@
         </div>
 
         <div id="buttonsState" class="buttons">
-            <a id="openBtn" class="btn" href="#">Abrir MangaReader</a>
+            <a id="openBtn" class="btn" href="#">Abrir MiManga</a>
             <div class="divider">-</div>
             <a id="installBtn" class="btn btn-install" href="https://play.google.com/store/apps/details?id=com.mangareader">
-                Instalar MangaReader
+                Instalar MiManga
             </a>
         </div>
     </div>
@@ -99,7 +99,7 @@
                 document.getElementById('loadingState').style.display = 'none';
                 document.getElementById('buttonsState').style.display = 'flex';
                 document.getElementById('title').textContent = 'App no detectada';
-                document.getElementById('subtitle').textContent = 'No se detectó MangaReader instalado. Instálala gratis para leer este manga.';
+                document.getElementById('subtitle').textContent = 'No se detectó MiManga instalado. Instálala gratis para leer este manga.';
             }, 2500);
         } else {
             document.getElementById('buttonsState').style.display = 'none';
