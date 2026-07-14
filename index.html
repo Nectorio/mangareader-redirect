@@ -31,34 +31,79 @@
             font-size: 18px;
             font-weight: 600;
             transition: background 0.2s;
+            margin-bottom: 12px;
         }
         .btn:hover { background: #5A52E0; }
-        .download { margin-top: 16px; }
-        .download a { color: #6C63FF; text-decoration: none; }
-        .download a:hover { text-decoration: underline; }
+        .btn-install {
+            background: #34A853;
+        }
+        .btn-install:hover { background: #2D8E47; }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #6C63FF;
+            color: #6C63FF;
+            padding: 12px 28px;
+        }
+        .btn-secondary:hover { background: #6C63FF22; }
+        .buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        .divider { color: #555; margin: 8px 0; }
+        .loading { display: none; }
+        .spinner {
+            border: 3px solid #333;
+            border-top: 3px solid #6C63FF;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="icon">&#128218;</div>
-        <h1>Abrir en MangaReader</h1>
-        <p>Para leer este manga necesitas tener la app MangaReader instalada.</p>
-        <a id="openBtn" class="btn" href="#">Abrir MangaReader</a>
-        <div class="download">
-            <p><a href="https://play.google.com/store/apps/details?id=com.mangareader">Descargar MangaReader</a></p>
+        <h1 id="title">Abrir en MangaReader</h1>
+        <p id="subtitle">Para leer este manga necesitas tener la app MangaReader instalada.</p>
+
+        <div id="loadingState" class="loading">
+            <div class="spinner"></div>
+            <p>Intentando abrir la app...</p>
+        </div>
+
+        <div id="buttonsState" class="buttons">
+            <a id="openBtn" class="btn" href="#">Abrir MangaReader</a>
+            <div class="divider">-</div>
+            <a id="installBtn" class="btn btn-install" href="https://play.google.com/store/apps/details?id=com.mangareader">
+                Instalar MangaReader
+            </a>
         </div>
     </div>
     <script>
         const params = new URLSearchParams(window.location.search);
         const mangaId = params.get('mangaId');
+
         if (mangaId) {
             const deepLink = 'mangareader://manga?mangaId=' + encodeURIComponent(mangaId);
             document.getElementById('openBtn').href = deepLink;
-            // Try to open the app automatically
+
+            // Show loading state while trying to open
+            document.getElementById('loadingState').style.display = 'block';
+            document.getElementById('buttonsState').style.display = 'none';
+
+            // Try to open the app
             window.location.href = deepLink;
+
+            // If after 2.5 seconds the page is still visible, app is not installed
+            setTimeout(function() {
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('buttonsState').style.display = 'flex';
+                document.getElementById('title').textContent = 'App no detectada';
+                document.getElementById('subtitle').textContent = 'No se detectó MangaReader instalado. Instálala gratis para leer este manga.';
+            }, 2500);
         } else {
-            document.getElementById('openBtn').style.display = 'none';
-            document.querySelector('p').textContent = 'Enlace no valido.';
+            document.getElementById('buttonsState').style.display = 'none';
+            document.getElementById('subtitle').textContent = 'Enlace no válido.';
         }
     </script>
 </body>
