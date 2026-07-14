@@ -32,21 +32,22 @@
             font-weight: 600;
             transition: background 0.2s;
             margin-bottom: 12px;
+            width: 100%;
         }
         .btn:hover { background: #5A52E0; }
-        .btn-install {
+        .btn-open { background: #6C63FF; }
+        .btn-playstore {
             background: #34A853;
         }
-        .btn-install:hover { background: #2D8E47; }
-        .btn-secondary {
+        .btn-playstore:hover { background: #2D8E47; }
+        .btn-direct {
             background: transparent;
-            border: 2px solid #6C63FF;
-            color: #6C63FF;
-            padding: 12px 28px;
+            border: 2px solid #FBBC04;
+            color: #FBBC04;
         }
-        .btn-secondary:hover { background: #6C63FF22; }
-        .buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }
-        .divider { color: #555; margin: 8px 0; }
+        .btn-direct:hover { background: #FBBC0422; }
+        .buttons { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .divider { color: #555; margin: 4px 0; font-size: 14px; }
         .loading { display: none; }
         .spinner {
             border: 3px solid #333;
@@ -58,6 +59,16 @@
             margin: 0 auto 16px;
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        .badge {
+            display: inline-block;
+            background: #333;
+            color: #aaa;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-top: -8px;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -72,10 +83,14 @@
         </div>
 
         <div id="buttonsState" class="buttons">
-            <a id="openBtn" class="btn" href="#">Abrir MiManga</a>
-            <div class="divider">-</div>
-            <a id="installBtn" class="btn btn-install" href="https://play.google.com/store/apps/details?id=com.mangareader">
-                Instalar MiManga
+            <a id="openBtn" class="btn btn-open" href="#">Abrir MiManga</a>
+            <div class="divider">o instala gratis</div>
+            <a id="playStoreBtn" class="btn btn-playstore" href="https://play.google.com/store/apps/details?id=com.mangareader">
+                Google Play Store
+            </a>
+            <span class="badge">Recomendado</span>
+            <a id="directBtn" class="btn btn-direct" href="https://github.com/Nectorio/mangareader-redirect/releases/latest/download/MiManga.apk">
+                Descargar APK directo
             </a>
         </div>
     </div>
